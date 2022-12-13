@@ -1,0 +1,289 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Aler Template">
+    <meta name="keywords" content="Aler, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aler | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+        <link rel="stylesheet" href="{% static 'static/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static '/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/magnific-popup.css' %}" type="text/css">
+    <!-- <link rel="stylesheet" href="{% static 'static/css/richtext.min.css' %}" type="text/css"> -->
+    <link rel="stylesheet" href="{% static 'static/css/image-uploader.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Wrapper Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <span class="icon_close"></span>
+        </div>
+        <div class="logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'img/logo.png' %}" alt="">
+            </a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+            {% if request.user.is_authenticated %}
+                        <div class="col-lg-10">
+                        <div class="ht-widget">
+                         <ul>
+                             <li> {{user.first_name}} {{user.last_name}}</li>
+                             
+                         </ul>
+                         <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
+                         <br>
+                         <a href="{% url 'property_submit' %}" class="hw-btn">Submit property</a>
+                     </div>
+                     </div>
+                    {%else%}
+                    <div class="col-lg-10">
+                           <div class="ht-widget">
+                            <ul>
+                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
+                                
+                            </ul>
+                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        </div>
+                    </div>
+                    {% endif %}
+          
+          
+    </div>
+    <!-- Offcanvas Menu Wrapper End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="hs-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="logo">
+                            <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                         {% if request.user.is_authenticated %}
+                        <div class="col-lg-10">
+                        <div class="ht-widget">
+                         <ul>
+                             <li> {{user.first_name}} {{user.last_name}}</li>
+                             
+                         </ul>
+                         <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
+                         <a href="{% url 'property_submit' %}" class="hw-btn">Submit property</a>
+                     </div>
+                     </div>
+                    {%else%}
+                    <div class="col-lg-10">
+                           <div class="ht-widget">
+                            <ul>
+                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
+                                
+                            </ul>
+                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="canvas-open">
+                    <span class="icon_menu"></span>
+                </div>
+            </div>
+        </div>
+        <div class="hs-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <nav class="nav-menu">
+                            <ul>
+                                <li><a href="{% url 'index' %}">Home</a></li>
+                                <li><a href="{% url 'property' %}">Properties</a>
+                                   
+                                </li>
+                                
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3">
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section spad set-bg" data-setbg="{% static 'img/breadcrumb-bg.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h4>Profile</h4>
+                        <div class="bt-option">
+                            <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
+                            <a href="{% url 'agent' %}">Agents</a>
+                            <span>Profile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Profile Section Begin -->
+    <section class="profile-section spad">
+        <div class="container">
+            <div class="profile-agent-content">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="profile-agent-info">
+                            <div class="pi-pic">
+                                <img src="{{agent.photo.url}}" width="120" height="120" alt="">
+                                
+                            </div>
+                            <div class="pi-text">
+                               
+                                <h5>{{agent.user.first_name}} {{agent.user.last_name}}</h5>
+                                <span>{{agent.city}}</span>
+                                <p>Since {{agent.created|date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="profile-agent-widget">
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="profile-agent-widget">
+                            <ul>
+                                <li>Property <span>{{prop_count.count}}</span></li>
+                                <li>Email <span>{{agent.user.email}}</span></li>
+                                <li>Phone <span>{{agent.phone}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Profile Section End -->
+
+    <!-- Property Section Begin -->
+    <section class="property-section profile-page spad">
+        <div class="container">
+            <div class="row">
+                {% for property in prop_count %}
+                <div class="col-lg-4">
+                    <div class="property-item">
+                        <div class="pi-pic set-bg" data-setbg="{{property.floor_plan.url}}">
+                            <div class="label">For {{property.contract_type}}</div>
+                        </div>
+                        <div class="pi-text">
+                            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                            <div class="pt-price">₦ {{property.price}}<span></span></div>
+                            <h5><a href="{% url 'property_show' property.id %}">{{property.title}}</a></h5>
+                            <p><span class="icon_pin_alt"></span> {{property.address}}</p>
+                            <ul>
+                                <li><i class="fa fa-object-group"></i> {{property.home_area}}</li>
+                                <li><i class="fa fa-bathtub"></i> {{property.bathrooms}}</li>
+                                <li><i class="fa fa-bed"></i> {{property.bedrooms}}</li>
+                                <li><i class="fa fa-automobile"></i> {{property.parking}}</li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% if request.user == agent %}
+    <section class="contact-form-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cf-content">
+                        <div class="cc-title">
+                            <h4>Update your profile</h4>
+                            
+                        </div>
+                        <form action="#" class="cc-form" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="group-input">
+                                
+                                <input type="text" placeholder="{{agent.user.first_name}} {{agent.user.last_name}} " name="company">
+                                <input type="text" placeholder="Phone" name="phone">
+                                <input type="text" placeholder="Location in this format: City, State" name="city">
+                                <input type="text" placeholder="State" name="state">
+                                
+                                
+                            </div>
+                            <textarea placeholder="Description" name="bio"></textarea>
+                            <div class="pf-feature-image">
+                                <h4>Photograph</h4>
+                                <div class="feature-image-content" type="file" name="photo" ></div>
+                            </div>
+                           
+                            <button type="submit" class="site-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- Property Section End -->
+
+    <!-- Contact Section Begin -->
+   
+    <!-- Contact Section End -->
+
+    <!-- Footer Section Begin -->
+      
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.richtext.min.js' %}"></script>
+    <script src="{% static 'js/image-uploader.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

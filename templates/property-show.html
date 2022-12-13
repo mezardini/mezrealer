@@ -1,0 +1,375 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Aler Template">
+    <meta name="keywords" content="Aler, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aler | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'static/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/slider.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/style.css' %}" type="text/css">
+    
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Wrapper Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <span class="icon_close"></span>
+        </div>
+        <div class="logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'img/logo.png' %}" alt="">
+            </a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+            {% if request.user.is_authenticated %}
+                        <div class="col-lg-10">
+                        <div class="ht-widget">
+                         <ul>
+                             <li> {{user.first_name}} {{user.last_name}}</li>
+                             
+                         </ul>
+                         <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
+                         <br>
+                         <a href="{% url 'property_submit' %}" class="hw-btn">Submit property</a>
+                     </div>
+                     </div>
+                    {%else%}
+                    <div class="col-lg-10">
+                           <div class="ht-widget">
+                            <ul>
+                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
+                                
+                            </ul>
+                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        </div>
+                    </div>
+                    {% endif %}
+          
+    </div>
+    <!-- Offcanvas Menu Wrapper End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="hs-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="logo">
+                            <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        <div class="col-lg-10">
+                        <div class="ht-widget">
+                         <ul>
+                             <li> {{user.first_name}} {{user.last_name}}</li>
+                             
+                         </ul>
+                         <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
+                         <a href="{% url 'property_submit' %}" class="hw-btn">Submit property</a>
+                     </div>
+                     </div>
+                    {%else%}
+                    <div class="col-lg-10">
+                           <div class="ht-widget">
+                            <ul>
+                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
+                                
+                            </ul>
+                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="canvas-open">
+                    <span class="icon_menu"></span>
+                </div>
+            </div>
+        </div>
+        <div class="hs-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <nav class="nav-menu">
+                            <ul>
+                                <li><a href="{% url 'index' %}">Home</a></li>
+                                <li class="active"><a href="{% url 'property' %}">Properties</a>
+                                   
+                                </li>
+                                <li><a href="{% url 'agent' %}">Agents</a></li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3">
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Property Details Section Begin -->
+    
+    
+    <section class="property-details-section">
+        
+       <section class="hero-section">
+        <div class="container">
+            <div class="hs-slider owl-carousel">
+                {% for photo in photos|slice:5 %}
+                <div class="hs-item set-bg" data-setbg="{{photo.photos.url}}">
+                   
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="pd-text">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="pd-title">
+                                    <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
+                                    <div class="label">For {{propertys.contract_type}}</div>
+                                    <div class="pt-price">₦ {{propertys.price}}<span>/year</span></div>
+                                    <h3>{{propertys.title}}</h3>
+                                    <p><span class="icon_pin_alt"></span> {{propertys.address}}</p>
+                                    <p><span class="icon_pin_alt"></span><b> {{propertys.town}}, {{propertys.state}}</b></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="pd-social">
+                                    <!-- <a href="#"><i class="fa fa-mail-forward"></i></a>
+                                    <a href="#"><i class="fa fa-send"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-mail-forward"></i></a>
+                                    <a href="#"><i class="fa fa-cloud-download"></i></a> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pd-board">
+                            <div class="tab-board">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Overview</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Description</a>
+                                    </li>
+                                    
+                                </ul><!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                        <div class="tab-details">
+                                            <ul class="left-table">
+                                                <li>
+                                                    <span class="type-name">Property Type</span>
+                                                    <span class="type-value">{{propertys.property_type}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Property ID</span>
+                                                    <span class="type-value">#00{{propertys.id}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Price</span>
+                                                    <span class="type-value">₦ {{propertys.price}}/year</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Year Built</span>
+                                                    <span class="type-value">{{propertys.year_built}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Contract type</span>
+                                                    <span class="type-value">{{propertys.contract_type}}</span>
+                                                </li>
+                                                
+                                            </ul>
+                                            <ul class="right-table">
+                                                <li>
+                                                    <span class="type-name">Agent</span>
+                                                    <span class="type-value">{{propertys.agent.user.first_name}} {{propertys.agent.user.last_name}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Home Area</span>
+                                                    <span class="type-value">{{propertys.home_area}}sqft</span>
+                                                </li>
+                                                
+                                                <li>
+                                                    <span class="type-name">Bedrooms</span>
+                                                    <span class="type-value">{{propertys.bedrooms}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Bathrooms</span>
+                                                    <span class="type-value">{{propertys.bathrooms}}</span>
+                                                </li>
+                                                
+                                                <li>
+                                                    <span class="type-name">Parking lots</span>
+                                                    <span class="type-value">{{propertys.parking}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                        <div class="tab-desc">
+                                            {{propertys.description}}
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="pd-widget">
+                            <h4>Floor plans</h4>
+                            <img src="{{propertys.floor_plan.url}}" alt="">
+                        </div> -->
+                        
+                        <div class="pd-widget">
+                            <h4>Agent</h4>
+                            <div class="pd-agent">
+                                <div class="agent-pic">
+                                    <img src="{{propertys.agent.photo.url}}" alt="">
+                                </div>
+                                <div class="agent-text">
+                                    <div class="at-title">
+                                        <h6>{{propertys.agent.user.first_name}} {{propertys.agent.user.last_name}}</h6>
+                                        <span>{{propertys.agent.company}}</span>
+                                        <a href="{% url 'profile' propertys.agent.id %}" class="primary-btn">View profile</a>
+                                        
+                                    </div>
+                                    <p>{{propertys.agent.bio}}</p>
+                                    <div class="at-option">
+                                        <div class="at-number">{{propertys.agent.phone}}</div>
+                                        <!-- <div class="at-number">{{propertys.agent.user.email}}</div> -->
+                                        <a href="mailto:{{propertys.agent.user.email}}?subject=I am interested in {{propertys.title}}" class="primary-btn">{{propertys.agent.user.email}}</a>
+                                        <br>
+                                        <br>
+                                        
+                                        
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pd-widget">
+                            
+                            <h4>{{reviews.count}} reviews</h4>
+                            {% for review in reviews %}
+                            <div class="pd-review">
+                                
+                                <div class="pr-item">
+                                    <div class="pr-avatar">
+                                        
+                                        <div class="pr-text">
+                                            <h6>{{review.creator}}</h6>
+                                            <span>{{review.created}}</span>
+                                            
+                                        </div>
+                                    </div>
+                                    <p>{{review.body}}</p>
+                                </div>
+                                
+                            </div>
+                            {% endfor %}  
+                        </div>
+                        
+                        
+                        <div class="pd-widget">
+                            <h4>YOur Review</h4>
+                            <form action="" class="review-form" method="POST">
+                                {% csrf_token %}
+                                <div class="group-input">
+                                    <input type="text" placeholder="Name" name="name">
+                                </div>
+                                <textarea placeholder="Messages" name="body"></textarea>
+                                
+                                <button type="submit" class="site-btn">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="property-sidebar">
+                        <div class="single-sidebar">
+                            <div class="section-title sidebar-title">
+                                <h5>Top agent</h5>
+                            </div>
+                            <div class="top-agent">
+                                {% for agent in agents|slice:4 %}
+                                <div class="ta-item">
+                                    <div class="ta-pic set-bg" data-setbg="{{agent.photo.url}}"></div>
+                                    <div class="ta-text">
+                                        <h6><a href="{% url 'profile' agent.id %}">{{agent.user.first_name}} {{agent.user.last_name}}</a></h6>
+                                        <span>{{agent.company}}</span>
+                                        <div class="ta-num">{{agent.phone}}</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </section>
+   
+    <!-- Property Details Section End -->
+
+    <!-- Contact Section Begin -->
+    
+    <!-- Contact Section End -->
+
+        <!-- Footer Section Begin -->
+      
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.richtext.min.js' %}"></script>
+    <script src="{% static 'js/image-uploader.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
