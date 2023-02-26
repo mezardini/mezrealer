@@ -64,10 +64,10 @@
                     <div class="col-lg-10">
                            <div class="ht-widget">
                             <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
-                                
+                                <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                                <div class="dropdown-divider"></div>
                             </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                            <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
                         </div>
                     </div>
                     {% endif %}
@@ -100,10 +100,10 @@
                     <div class="col-lg-10">
                            <div class="ht-widget">
                             <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
+                                <li class="btn btn-outline-dark"><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
                                 
                             </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                            <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
                         </div>
                     </div>
                     {% endif %}
@@ -147,21 +147,40 @@
                                     {% endfor %}
                                 </div>
                                 {% endif %}
-                                <div class="property-details-inputs">
+                                <!-- <div class="property-details-inputs">
                                     
                                     <input type="text" placeholder="First Name" name="firstname">
                                     <input type="text" placeholder="Last Name" name="lastname">                             
                                     <input type="text" placeholder="Email Address" name="email">
                                     <input type="password" placeholder="Password" name="password1">
-                                    <input type="password" placeholder="Confirm Password" name="password2">
-                                    
+                                    <input type="password" placeholder="Confirm Password" name="password2"> -->
+                                   
+                                        <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Email</label>
+                                            <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <label for="inputPassword4">First Name</label>
+                                            <input type="text" class="form-control" name="firstname" id="inputPassword4" placeholder="First Name">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Last Name</label>
+                                            <input type="text" class="form-control" name="lastname" id="inputEmail4" placeholder="Last Name">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <label for="inputPassword4">Password</label>
+                                            <input type="password" class="form-control" name="password1" id="inputPassword4" placeholder="Password">
+                                          </div>
+                                        </div>
+                                        <p>Already have an account? <a href="{% url 'login' %}" style="text-decoration: none;">Login</a></p>
+                                       
+                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                     
                                 </div>
                                 <!-- <button type="submit" class="site-btn">Submit Property</button> -->
                             </div>
-                            
-                                <p>Already have an account? <a href="">Login</a></p>
-                                <button type="submit" class="site-btn">Register</button>
-                            
+
                         </form>
                     </div>
                 </div>

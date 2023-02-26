@@ -42,7 +42,7 @@ class Property(models.Model):
     floor_plan = models.ImageField(upload_to='media')
     price = models.FloatField()
     property_type = models.CharField(max_length=50, choices=STATUS)
-    year_built = models.IntegerField()
+    year_of_build = models.DateField(blank=True, null=True)
     contract_type = models.CharField(max_length=50, choices=C_STATUS)
     home_area = models.IntegerField()
     bedrooms = models.IntegerField()

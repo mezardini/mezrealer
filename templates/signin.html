@@ -62,12 +62,12 @@
                      </div>
                     {%else%}
                     <div class="col-lg-10">
-                           <div class="ht-widget">
-                            <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
-                                
-                            </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        <div class="ht-widget">
+                         <ul>
+                             <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                             <div class="dropdown-divider"></div>
+                         </ul>
+                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
                         </div>
                     </div>
                     {% endif %}
@@ -98,14 +98,14 @@
                      </div>
                     {%else%}
                     <div class="col-lg-10">
-                           <div class="ht-widget">
-                            <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
-                                
-                            </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
-                        </div>
-                    </div>
+                        <div class="ht-widget">
+                         <ul>
+                             <li class="btn btn-outline-dark"> <i class="icon_mail_alt"></i>mezardini@gmail.com</li>
+                             
+                         </ul>
+                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
+                     </div>
+                 </div>
                     {% endif %}
                 </div>
                 <div class="canvas-open">
@@ -147,20 +147,22 @@
                                     {% endfor %}
                                 </div>
                                 {% endif %}
-                                <div class="property-details-inputs">
-                                    
-                                                               
-                                    <input type="text" placeholder="Email Address" name="email">
-                                    <input type="password" placeholder="Password" name="password">
-                                    
-                                    
-                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-10">
+                                      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                    </div>
+                                  </div>
+                                  <p>Already have an account? <a href="{% url 'register' %}">Sign Up</a></p>
+                                  <button type="submit" class="btn btn-primary">Sign in</button>
                                 <!-- <button type="submit" class="site-btn">Submit Property</button> -->
                             </div>
-                            
-                                <p>Already have an account? <a href="">Sign Up</a></p>
-                                <button type="submit" class="site-btn">Sign In</button>
-                            
                         </form>
                     </div>
                 </div>

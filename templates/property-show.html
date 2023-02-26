@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="{% static 'static/css/magnific-popup.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'static/css/slicknav.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'static/css/style.css' %}" type="text/css">
+    <link href="{% static 'static/modal/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'static/modal/css/fontawesome-all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'static/modal/css/swiper.css' %}" rel="stylesheet">
+    <link href="{% static 'static/modal/css/styles.css' %}" rel="stylesheet">
     
 </head>
 
@@ -60,12 +64,12 @@
                      </div>
                     {%else%}
                     <div class="col-lg-10">
-                           <div class="ht-widget">
-                            <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
-                                
-                            </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        <div class="ht-widget">
+                         <ul>
+                             <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                             <div class="dropdown-divider"></div>
+                         </ul>
+                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
                         </div>
                     </div>
                     {% endif %}
@@ -96,12 +100,12 @@
                      </div>
                     {%else%}
                     <div class="col-lg-10">
-                           <div class="ht-widget">
-                            <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
-                                
-                            </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        <div class="ht-widget">
+                         <ul>
+                             <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                             
+                         </ul>
+                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
                         </div>
                     </div>
                     {% endif %}
@@ -114,21 +118,7 @@
         <div class="hs-nav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9">
-                        <nav class="nav-menu">
-                            <ul>
-                                <li><a href="{% url 'index' %}">Home</a></li>
-                                <li class="active"><a href="{% url 'property' %}">Properties</a>
-                                   
-                                </li>
-                                <li><a href="{% url 'agent' %}">Agents</a></li>
-                                
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-lg-3">
-                          
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -161,10 +151,9 @@
                                 <div class="pd-title">
                                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                                     <div class="label">For {{propertys.contract_type}}</div>
-                                    <div class="pt-price">₦ {{propertys.price}}<span>/year</span></div>
+                                    <div class="pt-price">₦ {{propertys.price}}</div>
                                     <h3>{{propertys.title}}</h3>
-                                    <p><span class="icon_pin_alt"></span> {{propertys.address}}</p>
-                                    <p><span class="icon_pin_alt"></span><b> {{propertys.town}}, {{propertys.state}}</b></p>
+                                    <p><span class="icon_pin_alt"></span> {{propertys.address}}, {{propertys.town}} {{propertys.state}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -206,7 +195,7 @@
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Year Built</span>
-                                                    <span class="type-value">{{propertys.year_built}}</span>
+                                                    <span class="type-value">{{propertys.year_of_build|date:"Y"}}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Contract type</span>
@@ -271,52 +260,44 @@
                                     <div class="at-option">
                                         <div class="at-number">{{propertys.agent.phone}}</div>
                                         <!-- <div class="at-number">{{propertys.agent.user.email}}</div> -->
-                                        <a href="mailto:{{propertys.agent.user.email}}?subject=I am interested in {{propertys.title}}" class="primary-btn">{{propertys.agent.user.email}}</a>
+                                        <button class="primary-btn" data-toggle="modal" data-target="#exampleModal">Speak to realtor</button>
                                         <br>
                                         <br>
-                                        
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                <form method="POST">
+                                                                    {% csrf_token %}
+                                                                    <div class="form-group">
+                                                                      <label for="exampleInputEmail1">Email address</label>
+                                                                      <input type="email" name="sender" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                                      <small id="emailHelp" class="form-text text-muted">This is needed to get a response from the agent.</small>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="exampleFormControlTextarea1">Example textarea</label>
+                                                                        <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3" placeholder="Password"></textarea>
+                                                                    </div>
+                                                                   
+                                                                    <button type="submit" class="primary-btn">Submit</button>
+                                                                  </form>
+                                                              </div>
+                                                            </div>
+                                                          </div> 
+                                        </div>
                                         
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+
                         
-                        <div class="pd-widget">
-                            
-                            <h4>{{reviews.count}} reviews</h4>
-                            {% for review in reviews %}
-                            <div class="pd-review">
-                                
-                                <div class="pr-item">
-                                    <div class="pr-avatar">
-                                        
-                                        <div class="pr-text">
-                                            <h6>{{review.creator}}</h6>
-                                            <span>{{review.created}}</span>
-                                            
-                                        </div>
-                                    </div>
-                                    <p>{{review.body}}</p>
-                                </div>
-                                
-                            </div>
-                            {% endfor %}  
-                        </div>
-                        
-                        
-                        <div class="pd-widget">
-                            <h4>YOur Review</h4>
-                            <form action="" class="review-form" method="POST">
-                                {% csrf_token %}
-                                <div class="group-input">
-                                    <input type="text" placeholder="Name" name="name">
-                                </div>
-                                <textarea placeholder="Messages" name="body"></textarea>
-                                
-                                <button type="submit" class="site-btn">Submit</button>
-                            </form>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4">

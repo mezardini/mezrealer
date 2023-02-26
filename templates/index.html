@@ -16,15 +16,15 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="{% static 'static/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'static/css/jquery-ui.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'static/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'static/css/slider.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'static/css/magnific-popup.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'static/css/slicknav.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'static/css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 </head>
 
 <body>
@@ -59,12 +59,12 @@
                      </div>
                     {%else%}
                     <div class="col-lg-10">
-                           <div class="ht-widget">
-                            <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
-                                
-                            </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        <div class="ht-widget">
+                         <ul>
+                             <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                             <div class="dropdown-divider"></div>
+                         </ul>
+                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
                         </div>
                     </div>
                     {% endif %}
@@ -95,12 +95,12 @@
                      </div>
                     {%else%}
                     <div class="col-lg-10">
-                           <div class="ht-widget">
-                            <ul>
-                                <li><i class="icon_mail_alt"></i> mezardini@gmail.com</li>
-                                
-                            </ul>
-                            <a href="{% url 'register' %}" class="hw-btn">Become an agent</a>
+                        <div class="ht-widget">
+                         <ul>
+                             <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                             
+                         </ul>
+                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
                         </div>
                     </div>
                     {% endif %}
@@ -112,18 +112,7 @@
         <div class="hs-nav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9">
-                        <nav class="nav-menu">
-                            <ul>
-                                <li class="active"><a href="{% url 'index' %}">Home</a></li>
-                                <li><a href="{% url 'property' %}">Properties</a>
-                                   
-                                </li>
-                                <li><a href="{% url 'agent' %}">Agents</a></li>
-                                
-                            </ul>
-                        </nav>
-                    </div>
+                    
                     <div class="col-lg-3">
                           
                     </div>
@@ -244,7 +233,7 @@
                         <div class="ts-text">
                             <img src="{{agent.photo.url}}" alt="">
                             <h5>{{agent.user.first_name}} {{agent.user.last_name}}</h5>
-                            <span>{{agent.phone}}</span>
+                            <span>{{agent.user.email}}</span>
                             <p>{{agent.bio}}</p>
                             <div class="ts-social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>

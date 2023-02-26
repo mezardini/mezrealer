@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from .filters import PropertyFilter, PriceFilter
 from django.core.paginator import Paginator
 from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 def index(request):
     propertys = Property.objects.all()
@@ -50,7 +51,7 @@ def register(request):
         last_name = request.POST.get('lastname')
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        password2 = request.POST.get('password1')
         
         if User.objects.filter(email=email).exists():
                 messages.error(request, "User already exists.")
@@ -88,8 +89,6 @@ def property(request):
     propertys = Property.objects.all()    
     property_type = PropertyFilter(request.GET, queryset=propertys)
     f = PriceFilter({'request.GET': '1800000', 'request.GET': '5000000'}, queryset=propertys)
-    
-    
 
     prop_pagi = Paginator(propertys, 2 )
 
@@ -97,7 +96,6 @@ def property(request):
 
     page = prop_pagi.get_page(page_num)
 
-   
 
     context = {'propertys':propertys, 'property_type':property_type, 'f':f, 'page':page, 'count':prop_pagi.count}
     return render(request, 'property.html', context)
@@ -152,18 +150,24 @@ def property_submit(request):
 
 def property_show(request, pk):
     propertys = Property.objects.get(id=pk)
+    prop_agent = propertys.agent.user.email
+    prop_agent_name = propertys.agent.user.first_name
     property = Property.objects.all()
     photos = propertys.photo_set.all()
     reviews = propertys.property_review_set.all()
     agents = Agent.objects.all()
     
     if request.method == 'POST':
-        review = Property_review.objects.create(
-            property = propertys,
-            body = request.POST.get('body'),
-            creator = request.POST.get('name'),
+        sender = request.POST.get('sender')
+        body = request.POST.get('body')
+        send_mail(
+            'Message from Realer',
+            'Hello, ' + prop_agent_name + ' you have a message from ' + sender + ' here is the message; ' + body ,
+            'settings.EMAIL_HOST_USER',
+            [prop_agent],
+            fail_silently=False,
         )
-        review.save()
+        
 
     # prop_photo = propertys.photos.set_all()'prop-photo':prop_photo
 
