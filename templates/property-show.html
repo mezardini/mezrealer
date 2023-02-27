@@ -54,7 +54,7 @@
                         <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
-                             <li> {{user.first_name}} {{user.last_name}}</li>
+                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com">mezardini@gmail.com</a></li>
                              
                          </ul>
                          <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
@@ -66,7 +66,7 @@
                     <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
-                             <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com"> mezardini@gmail.com</a></li>
                              <div class="dropdown-divider"></div>
                          </ul>
                          <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
@@ -91,7 +91,7 @@
                         <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
-                             <li> {{user.first_name}} {{user.last_name}}</li>
+                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com">mezardini@gmail.com</a></li>
                              
                          </ul>
                          <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
@@ -102,7 +102,7 @@
                     <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
-                             <li class="btn btn-outline-dark"> mezardini@gmail.com</li>
+                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com">mezardini@gmail.com</a></li>
                              
                          </ul>
                          <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
@@ -268,7 +268,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Send a mail to the agent</h5>
                                                                 
                                                               </div>
                                                               <div class="modal-body">
@@ -280,11 +280,11 @@
                                                                       <small id="emailHelp" class="form-text text-muted">This is needed to get a response from the agent.</small>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="exampleFormControlTextarea1">Example textarea</label>
-                                                                        <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3" placeholder="Password"></textarea>
+                                                                        <label for="exampleFormControlTextarea1">Your message</label>
+                                                                        <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3" placeholder="Hello, I would like ....."></textarea>
                                                                     </div>
                                                                    
-                                                                    <button type="submit" class="primary-btn">Submit</button>
+                                                                    <button type="submit" class="primary-btn">Send</button>
                                                                   </form>
                                                               </div>
                                                             </div>

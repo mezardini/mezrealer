@@ -100,8 +100,6 @@ def property(request):
     context = {'propertys':propertys, 'property_type':property_type, 'f':f, 'page':page, 'count':prop_pagi.count}
     return render(request, 'property.html', context)
 
-
-
 def signout(request):
     logout(request)
     return redirect('login') 
@@ -174,12 +172,6 @@ def property_show(request, pk):
     context = {'propertys':propertys, 'property':property, 'photos':photos, 'reviews':reviews, 'agents':agents }
     return render(request, 'property-show.html', context)
 
-def photoshow(request, pk):
-    propertys = Property.objects.get(id=pk)
-    photos = propertys.photo_set.all()
-
-    context = {'propertys':propertys, 'photos':photos}
-    return render(request, 'photos.html', context)
 
 def agent(request):
     agents = Agent.objects.all()
@@ -193,8 +185,6 @@ def agent(request):
     context = {'agents':agents}
     return render(request, 'agents.html', context)
 
-def contact(request):
-    return render(request, 'contact.html')
 
 def profile(request, pk):
     agent = Agent.objects.get(id=pk)
@@ -217,8 +207,6 @@ def profile(request, pk):
     context = {'agent':agent, 'prop_count':prop_count}
     return render(request, 'profile.html', context)
 
-def about(request):
-    return render(request, 'about.html')
 
 def error_404_view(request, exception):
    
