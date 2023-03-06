@@ -47,7 +47,7 @@ class Property(models.Model):
     home_area = models.IntegerField()
     bedrooms = models.IntegerField()
     bathrooms =  models.IntegerField()
-    parking = models.IntegerField()
+    parking = models.IntegerField(null=True)
     agent = models.ForeignKey(Agent, on_delete=models.CASCADE, null=True)
     created = models.DateTimeField(auto_now_add=True)
     
@@ -65,8 +65,5 @@ class Photo(models.Model):
 
 
 
-class Property_review(models.Model):
-    creator = models.CharField(max_length=500, null=True)
-    body = models.TextField(null=True)
-    property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
+
+

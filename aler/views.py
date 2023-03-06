@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Property, Agent, Photo, Property_review
+from .models import Property, Agent, Photo
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
@@ -11,12 +11,12 @@ from django.core.mail import send_mail
 # Create your views here.
 def index(request):
     propertys = Property.objects.all()
-    photo = Photo.objects.filter(prop=propertys)
+    # photo = Photo.objects.filter(prop=propertys)
     
     agents = Agent.objects.all()
 
 
-    context = {'propertys':propertys, 'photo':photo, 'agents':agents}
+    context = {'propertys':propertys,  'agents':agents}
     return render(request, 'index.html', context)
 
 def login(request):
@@ -122,7 +122,7 @@ def property_submit(request):
                     property_type = request.POST.get('property_type'),
                     floor_plan = request.FILES.get('floor_plan'),
                     price = str(request.POST.get('price')),
-                    year_built = request.POST.get('year_built'),
+                    year_of_build = request.POST.get('year_of_build'),
                     contract_type = request.POST.get('contract_type'),
                     home_area = str(request.POST.get('home_area')),
                     bedrooms = request.POST.get('bedrooms'),
