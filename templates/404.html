@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{% static 'static/css/bootstrap.min.css' %}" type="text/css">
@@ -37,37 +39,44 @@
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="canvas-close">
-            <span class="icon_close"></span>
+            <span class="">R</span>
         </div>
         <div class="logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'img/logo.png' %}" alt="">
+                <img src="{% static 'img/realer.svg' %}" alt="">
             </a>
         </div>
         <div id="mobile-menu-wrap"></div>
-            {% if request.user.is_authenticated %}
-                        <div class="col-lg-10">
+            <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
-                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com">mezardini@gmail.com</a></li>
-                             
-                         </ul>
-                         <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
-                         <br>
-                         <a href="{% url 'property_submit' %}" class="hw-btn">Submit property</a>
-                     </div>
-                     </div>
-                    {%else%}
-                    <div class="col-lg-10">
-                        <div class="ht-widget">
-                         <ul>
-                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com"> mezardini@gmail.com</a></li>
+                              <div class="card">
+                                <div class="card-header">
+                                  Contact Owner
+                                </div>
+                                <div class="card-body">
+                                  
+                                  <form method="POST" action="{% url 'mailmezard' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                      <label for="exampleFormControlInput1">Email address</label>
+                                      <input type="email" name="sender" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>                                            
+                                    <div class="form-group">
+                                      <label for="exampleFormControlTextarea1">Example textarea</label>
+                                      <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                  </form>
+                                  
+                                </div>
+                              </div>
                              <div class="dropdown-divider"></div>
                          </ul>
-                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
+                         <a href="{% url 'property_submit' %}" class="btn btn-outline-success">Submit Property</a>
                         </div>
                     </div>
-                    {% endif %}
           
     </div>
     <!-- Offcanvas Menu Wrapper End -->
@@ -79,14 +88,44 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                            <a href="{% url 'index' %}"><img src="{% static 'img/realer.svg' %}" alt=""></a>
                         </div>
                     </div>
                    {% if request.user.is_authenticated %}
                         <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
-                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com">mezardini@gmail.com</a></li>
+                             <li ><button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">
+                                Contact Creator
+                              </button></li>
+                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Shoot a mail to the creator</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="{% url 'mailmezard' %}">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                              <label for="exampleFormControlInput1">Email address</label>
+                                              <input type="email" name="sender" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>                                            
+                                            <div class="form-group">
+                                              <label for="exampleFormControlTextarea1">Example textarea</label>
+                                              <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Send</button>
+                                          </form>
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                              </div>
                              
                          </ul>
                          <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
@@ -97,15 +136,36 @@
                     <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
-                             <li class="btn btn-outline-dark"><a href="mailto:mezardini@gmail.com">mezardini@gmail.com</a></li>
+                              <div class="card">
+                                <div class="card-header">
+                                  Contact Owner
+                                </div>
+                                <div class="card-body">
+                                  
+                                  <form method="POST" action="{% url 'mailmezard' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                      <label for="exampleFormControlInput1">Email address</label>
+                                      <input type="email" name="sender" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>                                            
+                                    <div class="form-group">
+                                      <label for="exampleFormControlTextarea1">Example textarea</label>
+                                      <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                  </form>
+                                  
+                                </div>
+                              </div>
                              <div class="dropdown-divider"></div>
                          </ul>
-                         <a href="{% url 'register' %}" class="btn btn-outline-success">Become an agent</a>
+                         <a href="{% url 'property_submit' %}" class="btn btn-outline-success">Submit Property</a>
                         </div>
                     </div>
                     {% endif %}
                 <div class="canvas-open">
-                    <span class="icon_menu"></span>
+                    <span class="">R</span>
                 </div>
             </div>
         </div>

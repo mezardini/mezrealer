@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Property, Agent, Photo
+from .models import Property,  Photo
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User, auth, Group
 from django.contrib.auth import authenticate, login, logout
 from .filters import PropertyFilter, PriceFilter
 from django.core.paginator import Paginator
@@ -13,68 +13,11 @@ def index(request):
     propertys = Property.objects.all()
     # photo = Photo.objects.filter(prop=propertys)
     
-    agents = Agent.objects.all()
+    # agents = Agent.objects.all()
 
 
-    context = {'propertys':propertys,  'agents':agents}
+    context = {'propertys':propertys}
     return render(request, 'index.html', context)
-
-def login(request):
-
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST['password']
-
-        if not request.POST.get('email'):
-            messages.error(request, "Email cannot be blank.")
-            return redirect('login')
-
-        if not request.POST.get('password'):
-            messages.error(request, "Password cannot be blank.")
-            return redirect('login')
-
-        user = auth.authenticate(request, username=email, password=password)
-
-        if user is not None:
-            auth.login(request, user)
-            return redirect('index')
-        else:
-            messages.error(request, "Incorrect username or password.")
-            return render(request, 'signin.html')
-
-    return render(request, 'signin.html')
-
-def register(request):
-    if request.method == 'POST':
-        username = request.POST.get('email')
-        first_name = request.POST.get('firstname')
-        last_name = request.POST.get('lastname')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password1')
-        
-        if User.objects.filter(email=email).exists():
-                messages.error(request, "User already exists.")
-                return redirect('register')
-
-        if not request.POST.get('password1'):
-            messages.error(request, "Password cannot be blank.")
-            return redirect('register')
-
-        if password1 != password2:
-            messages.error(request, "Passwords do not match.")
-            return redirect('register')
-
-        if password1 == password2:
-            if User.objects.filter(email=email).exists():
-                messages.error(request, "User already exists.")
-                return redirect('register')
-            else:
-                user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
-                return redirect('login')
-
-    
-    return render(request, 'signup.html')
 
 
 def prop_filter(request):
@@ -100,11 +43,8 @@ def property(request):
     context = {'propertys':propertys, 'property_type':property_type, 'f':f, 'page':page, 'count':prop_pagi.count}
     return render(request, 'property.html', context)
 
-def signout(request):
-    logout(request)
-    return redirect('login') 
 
-@login_required(login_url='login')
+
 def property_submit(request):
 
     if request.method == 'POST':
@@ -117,8 +57,6 @@ def property_submit(request):
                     title = request.POST.get('title'),
                     description = request.POST.get('description'),
                     address = request.POST.get('address'),
-                    town = request.POST.get('town'),
-                    state = request.POST.get('state'),
                     property_type = request.POST.get('property_type'),
                     floor_plan = request.FILES.get('floor_plan'),
                     price = str(request.POST.get('price')),
@@ -127,7 +65,8 @@ def property_submit(request):
                     home_area = str(request.POST.get('home_area')),
                     bedrooms = request.POST.get('bedrooms'),
                     bathrooms = request.POST.get('bathrooms'),
-                    agent = request.user,
+                    agent_name = request.POST.get('agent_name'),
+                    agent_mail = request.POST.get('agent_mail'),
                     parking = request.POST.get('parking'),
                     
                 )
@@ -148,12 +87,12 @@ def property_submit(request):
 
 def property_show(request, pk):
     propertys = Property.objects.get(id=pk)
-    prop_agent = propertys.agent.user.email
-    prop_agent_name = propertys.agent.user.first_name
+    prop_agent = propertys.agent_mail
+    prop_agent_name = propertys.agent_name
     property = Property.objects.all()
     photos = propertys.photo_set.all()
     reviews = propertys.property_review_set.all()
-    agents = Agent.objects.all()
+    # agents = Agent.objects.all()
     
     if request.method == 'POST':
         sender = request.POST.get('sender')
@@ -169,43 +108,24 @@ def property_show(request, pk):
 
     # prop_photo = propertys.photos.set_all()'prop-photo':prop_photo
 
-    context = {'propertys':propertys, 'property':property, 'photos':photos, 'reviews':reviews, 'agents':agents }
+    context = {'propertys':propertys, 'property':property, 'photos':photos, 'reviews':reviews}
     return render(request, 'property-show.html', context)
 
 
-def agent(request):
-    agents = Agent.objects.all()
-    
-    if request.method == 'POST':
-        searched = request.POST['searched']
-        agentx = User.objects.filter(first_name__contains = searched)
-        return render(request, 'search_agent.html', {'searched':searched, 'agents':agents, 'agentx':agentx})
-
-    
-    context = {'agents':agents}
-    return render(request, 'agents.html', context)
-
-
-def profile(request, pk):
-    agent = Agent.objects.get(id=pk)
-    property = Property.objects.all()
-    prop_count = Property.objects.filter(agent=agent)
+def mailMezard(request):
 
     if request.method == 'POST':
-        agent = Agent.objects.create(
-            user = request.user,
-            bio = request.POST.get('bio'),
-            phone = request.POST.get('phone'),
-            city = request.POST.get('city'),
-            company = request.POST.get('company'),
-            photo = request.FILES.get('photo'),
+        sender = request.POST.get('sender')
+        body = request.POST.get('body')
+        send_mail(
+            'Message from ' + sender,
+            body,
+            'settings.EMAIL_HOST_USER',
+            ['mezardini@gmail.com'],
+            fail_silently=False,
         )
-        agent.save()
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
-    
-
-    context = {'agent':agent, 'prop_count':prop_count}
-    return render(request, 'profile.html', context)
 
 
 def error_404_view(request, exception):

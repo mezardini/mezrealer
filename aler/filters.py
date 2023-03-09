@@ -8,10 +8,9 @@ class PropertyFilter(django_filters.FilterSet):
     price = RangeFilter()
     property_type = {'property_type': ['exact']}
     contract_type = {'contract_type': ['exact']}
-    state = {'state': ['exact']}
     class Meta:
         model = Property
-        fields = ['contract_type', 'property_type', 'state', 'price']
+        fields = ['contract_type', 'property_type',  'price']
 
 class PriceFilter(FilterSet):
     price = RangeFilter()
