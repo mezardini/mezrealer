@@ -91,7 +91,7 @@
                             <a href="{% url 'index' %}"><img src="{% static 'img/realer.svg' %}" alt=""></a>
                         </div>
                     </div>
-                   {% if request.user.is_authenticated %}
+                   
                         <div class="col-lg-10">
                         <div class="ht-widget">
                          <ul>
@@ -128,42 +128,11 @@
                               </div>
                              
                          </ul>
-                         <a href="{% url 'signout' %}" class="hw-btn">Sign Out</a>
+                         
                          <a href="{% url 'property_submit' %}" class="hw-btn">Submit property</a>
                      </div>
                      </div>
-                    {%else%}
-                    <div class="col-lg-10">
-                        <div class="ht-widget">
-                         <ul>
-                              <div class="card">
-                                <div class="card-header">
-                                  Contact Owner
-                                </div>
-                                <div class="card-body">
-                                  
-                                  <form method="POST" action="{% url 'mailmezard' %}">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                      <label for="exampleFormControlInput1">Email address</label>
-                                      <input type="email" name="sender" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                    </div>                                            
-                                    <div class="form-group">
-                                      <label for="exampleFormControlTextarea1">Example textarea</label>
-                                      <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Send</button>
-                                  </form>
-                                  
-                                </div>
-                              </div>
-                             <div class="dropdown-divider"></div>
-                         </ul>
-                         <a href="{% url 'property_submit' %}" class="btn btn-outline-success">Submit Property</a>
-                        </div>
-                    </div>
-                    {% endif %}
+                    
                 <div class="canvas-open">
                     <span class="">R</span>
                 </div>
