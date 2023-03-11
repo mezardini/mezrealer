@@ -65,8 +65,8 @@ def property_submit(request):
                     home_area = str(request.POST.get('home_area')),
                     bedrooms = request.POST.get('bedrooms'),
                     bathrooms = request.POST.get('bathrooms'),
-                    agent_name = request.POST.get('agent_name'),
-                    agent_mail = request.POST.get('agent_mail'),
+                    agent_name = request.POST.get('name'),
+                    agent_mail = request.POST.get('mail'),
                     parking = request.POST.get('parking'),
                     
                 )
