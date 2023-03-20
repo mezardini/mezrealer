@@ -272,50 +272,33 @@
                         <div class="pd-widget">
                             <h4>Agent</h4>
                             <div class="pd-agent">
-                                <div class="agent-pic">
-                                    <img src="{{propertys.agent.photo.url}}" alt="">
-                                </div>
+                               
                                 <div class="agent-text">
                                     <div class="at-title">
                                         <h6>{{propertys.agent_name}}</h6>
-                                        <!-- <span>{{propertys.agent.company}}</span>
-                                        <a href="{% url 'profile' propertys.agent.id %}" class="primary-btn">View profile</a> -->
+                                        
+                                      
                                         
                                     </div>
-                                    <!-- <p>{{propertys.agent.bio}}</p> -->
+                                   
                                     <div class="at-option">
-                                        <div class="at-number">{{propertys.agent.phone}}</div>
-                                        <!-- <div class="at-number">{{propertys.agent.user.email}}</div> -->
-                                        <button class="primary-btn" data-toggle="modal" data-target="#exampleModal">Speak to realtor</button>
+                                        <form method="POST" action="">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                              <label for="exampleFormControlInput1">Email address</label>
+                                              <input type="email" name="sender" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>                                            
+                                            <div class="form-group">
+                                              <label for="exampleFormControlTextarea1">Example textarea</label>
+                                              <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            </div>
+                                            <button type="submit" class="primary-btn">Send</button>
+                                         </form>
+                                        
                                         <br>
                                         <br>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                              <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Send a mail to the agent</h5>
-                                                                
-                                                              </div>
-                                                              <div class="modal-body">
-                                                                <form method="POST">
-                                                                    {% csrf_token %}
-                                                                    <div class="form-group">
-                                                                      <label for="exampleInputEmail1">Email address</label>
-                                                                      <input type="email" name="sender" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                                                      <small id="emailHelp" class="form-text text-muted">This is needed to get a response from the agent.</small>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="exampleFormControlTextarea1">Your message</label>
-                                                                        <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3" placeholder="Hello, I would like ....."></textarea>
-                                                                    </div>
-                                                                   
-                                                                    <button type="submit" class="primary-btn">Send</button>
-                                                                  </form>
-                                                              </div>
-                                                            </div>
-                                                          </div> 
-                                        </div>
+                                      
                                         
                                     </div>
 
@@ -326,28 +309,8 @@
                         
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="property-sidebar">
-                        <div class="single-sidebar">
-                            <div class="section-title sidebar-title">
-                                <h5>Top agent</h5>
-                            </div>
-                            <div class="top-agent">
-                                {% for agent in agents|slice:4 %}
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="{{agent.photo.url}}"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="{% url 'profile' agent.id %}">{{agent.user.first_name}} {{agent.user.last_name}}</a></h6>
-                                        <span>{{agent.company}}</span>
-                                        <div class="ta-num">{{agent.phone}}</div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
+               
+              
             </div>
         </div>
         

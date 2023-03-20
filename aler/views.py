@@ -8,6 +8,9 @@ from .filters import PropertyFilter, PriceFilter
 from django.core.paginator import Paginator
 from django.conf import settings
 from django.core.mail import send_mail
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.base import ContentFile
+
 # Create your views here.
 def index(request):
     propertys = Property.objects.all()
@@ -58,7 +61,7 @@ def property_submit(request):
                     description = request.POST.get('description'),
                     address = request.POST.get('address'),
                     property_type = request.POST.get('property_type'),
-                    floor_plan = request.FILES.get('floor_plan'),
+                    hero_photo = request.FILES.get('photo'),
                     price = str(request.POST.get('price')),
                     year_of_build = request.POST.get('year_of_build'),
                     contract_type = request.POST.get('contract_type'),
@@ -68,20 +71,15 @@ def property_submit(request):
                     agent_name = request.POST.get('name'),
                     agent_mail = request.POST.get('mail'),
                     parking = request.POST.get('parking'),
-                    
                 )
         property.save()
-
         for image in images:
             photo = Photo.objects.create(
                 prop = property,
                 photos = image
             )
             photo.save()
-            
-            
-    
-        return redirect('property_submit')
+        return redirect('property_show' , pk=property.id)
 
     return render(request, 'property-submit.html')
 
@@ -91,7 +89,7 @@ def property_show(request, pk):
     prop_agent_name = propertys.agent_name
     property = Property.objects.all()
     photos = propertys.photo_set.all()
-    reviews = propertys.property_review_set.all()
+    
     # agents = Agent.objects.all()
     
     if request.method == 'POST':
@@ -108,7 +106,7 @@ def property_show(request, pk):
 
     # prop_photo = propertys.photos.set_all()'prop-photo':prop_photo
 
-    context = {'propertys':propertys, 'property':property, 'photos':photos, 'reviews':reviews}
+    context = {'propertys':propertys, 'property':property, 'photos':photos}
     return render(request, 'property-show.html', context)
 
 

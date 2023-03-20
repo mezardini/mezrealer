@@ -14,9 +14,19 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"> 
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <!-- Css Styles -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
@@ -27,6 +37,7 @@
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
 </head>
 
 <body>
@@ -154,13 +165,13 @@
         <div class="container">
             <div class="hs-slider owl-carousel">
                 {% for property in propertys|slice:3 %}
-                <div class="hs-item set-bg" data-setbg="{{property.floor_plan.url}}">
+                <div class="hs-item set-bg" data-setbg="{{property.hero_photo.url}}">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="hc-inner-text">
                                 <div class="hc-text">
                                     <h5><a href="{% url 'property_show' property.id %}">{{property.title}}</a></h5>
-                                    <p><span class="icon_pin_alt"></span> {{property.address}}</p>
+                                    <p> {{property.address}}</p>
                                     <div class="label">For {{property.contract_type}}</div>
                                     
                                 </div>
@@ -192,88 +203,39 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="section-title">
-                        <h4>Latest PROPERTIES</h4>
+                        <h4>Latest PROPERTY</h4>
                     </div>
                 </div>
                 
+            </div>
             <div class="row property-filter">
-                {% for property in propertys|slice:3 %}
-                <div class="col-lg-4 col-md-6  {{property.property_type}} ">
+                {% for property in propertys %}
+                <div class="col-lg-4 col-md-6 mix all house">
                     <div class="property-item">
-                        <div class="pi-pic set-bg" data-setbg="{{property.floor_plan.url}}">
+                        <div class="pi-pic set-bg" data-setbg="{{property.hero_photo.url}}">
                             <div class="label">For {{property.contract_type}}</div>
                         </div>
                         <div class="pi-text">
                             
-                            <div class="pt-price">₦ {{property.price}}<span></span></div>
+                            <div class="pt-price">$ {{property.price}}</div>
                             <h5><a href="{% url 'property_show' property.id %}">{{property.title}}</a></h5>
-                            <p><span class="icon_pin_alt"></span> {{property.address}}</p>
+                            
                             <ul>
-                                <li><i class="fa fa-object-group"></i> {{property.home_area}}</li>
+                                <li><i class="fa fa-object-group"></i> 2, 283</li>
                                 <li><i class="fa fa-bathtub"></i> {{property.bathrooms}}</li>
                                 <li><i class="fa fa-bed"></i> {{property.bedrooms}}</li>
                                 <li><i class="fa fa-automobile"></i> {{property.parking}}</li>
                             </ul>
-                            <div class="pi-agent">
-                                <div class="pa-item">
-                                    <div class="pa-info">
-                                        <img src="{% static 'img/property/posted-by/pb-1.jpg' %}" alt="">
-                                        <h6>{{property.agent.user.first_name}} {{property.agent.user.last_name}}</h6>
-                                    </div>
-                                    <div class="pa-text">
-                                        {{property.agent.phone}}
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-            <div class="col-lg-12">
-                <div class="loadmore-btn">
-                    <a href="{% url 'property' %}">Load more</a>
-                </div>
-            </div>
-            
         </div>
     </section>
     <!-- Property Section End -->
-    <section class="team-section spad">
-        <div class="container">
-            
-            <div class="row">
-                <div class="col-lg-8 col-md-8">
-                    <div class="section-title">
-                        <h4>Top Agents</h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    
-                </div>
-            </div>
-            
-            <div class="row">
-                {% for agent in agents|slice:3 %}
-                <div class="col-md-4">
-                    <div class="ts-item">
-                        <div class="ts-text">
-                            <img src="{{agent.photo.url}}" alt="">
-                            <h5>{{agent.user.first_name}} {{agent.user.last_name}}</h5>
-                            <span>{{agent.user.email}}</span>
-                            <p>{{agent.bio}}</p>
-                            <div class="ts-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-envelope-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
+    
     <!-- Chooseus Section Begin -->
     <section class="chooseus-section spad set-bg" data-setbg="{% static 'img/chooseus/chooseus-bg.jpg' %}">
         <div class="container">
@@ -319,7 +281,7 @@
                             </div>
                             <div class="cf-text">
                                 <h5>List your own property</h5>
-                                <p>Sign up now and sell or rent your own properties</p>
+                                <p>There's no need to sign up, just put up your listing</p>
                             </div>
                         </div>
                     </div>
@@ -331,37 +293,8 @@
 
     <!-- Feature Property Section Begin -->
     
-    <!-- Feature Property Section End -->
-
-    <!-- Team Section Begin -->
-    
-    <!-- Team Section End -->
-
-    <!-- Categories Section Begin -->
-    <section class="categories-section">
-        <div class="cs-item-list">
-            
-            
-        </div>
-    </section>
-    <!-- Categories Section End -->
-
-    <!-- Testimonial Section Begin -->
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <!-- Testimonial Section End -->
-
-    <!-- Logo Carousel Begin -->
    
-    <!-- Contact Section End -->
 
-    <!-- Footer Section Begin -->
-      
-    <!-- Footer Section End -->
 
     <!-- Js Plugins -->
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
