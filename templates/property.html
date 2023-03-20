@@ -191,9 +191,7 @@
                         <div class="form-group col-md-2 mb-0 ">
                         {{property_type.form.contract_type|as_crispy_field}}
                         </div>                               
-                        <div class="form-group col-md-2 mb-0 ">
-                        {{property_type.form.state|as_crispy_field}}
-                        </div>                                                  
+                                                                         
                 </div>
                 
                 <div class="form-row ">
@@ -225,7 +223,7 @@
                 {% for property in page.object_list %}
                     <div class="col-lg-4 col-md-6 mix all house apart">
                         <div class="property-item">
-                            <div class="pi-pic set-bg" data-setbg="{{property.floor_plan.url}}">
+                            <div class="pi-pic set-bg" data-setbg=" {{property.hero_photo.url}}">
                                 <div class="label">For {{property.contract_type}}</div>
                             </div>
                             <div class="pi-text">
