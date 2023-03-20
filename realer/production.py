@@ -5,7 +5,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['realer.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = ['realer.onrender.com']
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
